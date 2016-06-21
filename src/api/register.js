@@ -12,7 +12,7 @@ var auth = jwt({
 
 var router = express.Router();
 
-router.post('/users', function(req, res) {
+router.post('/register', function(req, res) {
   var user = new User();
 
   console.log("users");

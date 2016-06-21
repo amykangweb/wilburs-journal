@@ -1,1 +1,13 @@
-register.html
+<form ng-submit="register(newUser)" name="newRegistration">
+<p>
+  <label for="email">Email</label><br>
+  <input type="text" name="email" ng-model="newUser.email">
+  </p>
+  <p>
+  <label for="password">Password</label><br>
+  <input type="password" name="password" ng-model="newUser.password">
+  </p>
+  <p>
+  <input type="submit" value="Register!">
+  </p>
+</form>

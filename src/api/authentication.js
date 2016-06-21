@@ -12,13 +12,16 @@ module.exports.register = function(req, res) {
 
   user.setPassword(req.body.password);
 
-  user.save(function(err) {
-    var token;
-    token = user.generateJWT();
-    res.status(200);
-    res.json({
-      "token" : token
-    });
+  user.save(function(err, user) {
+    console.log("how about here");
+
+    if(err) {
+      console.log(err.message);
+      return res.status(500).json({err: err.message});
+    }
+    console.log("made it here");
+    var token = user.generateJWT();
+    res.json({'token': token, 'email': user.email});
   });
 };
 
