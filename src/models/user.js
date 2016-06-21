@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-var secret = require('../../env.js');
+var secret = require('../../env');
 
 // user.email
 
