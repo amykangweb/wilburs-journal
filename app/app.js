@@ -10,4 +10,3 @@ require('./scripts/directives/profile.js');
 require('./scripts/directives/register.js');
 require('./scripts/directives/users.js');
 require('./scripts/services/authentication.js');
-require('./scripts/services/registration.js');

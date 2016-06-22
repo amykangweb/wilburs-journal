@@ -14,7 +14,6 @@ webpackJsonp([0],[
 	__webpack_require__(6);
 	__webpack_require__(7);
 	__webpack_require__(8);
-	__webpack_require__(9);
 
 
 /***/ },
@@ -90,37 +89,6 @@ webpackJsonp([0],[
 
 	var angular = __webpack_require__(1);
 
-	angular.module('wilbursJournal').service('dataService', function($http, $window) {
-
-	  var saveToken = function(token) {
-	    $window.localStorage['mean-token'] = token;
-	  };
-
-	  var getToken = function() {
-	    return $window.localStorage['mean-token'];
-	  }
-
-	  var logout = function() {
-	    $window.localStorage.removeItem('mean-token');
-	  };
-
-	  return {
-	    saveToken: saveToken,
-	    getToken: getToken,
-	    logout: logout
-	  };
-
-	});
-
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var angular = __webpack_require__(1);
-
 	angular.module('wilbursJournal')
 	.service('authenticationService', function($http, $q) {
 
@@ -135,6 +103,7 @@ webpackJsonp([0],[
 
 
 /***/ },
+/* 9 */,
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -149,9 +118,6 @@ webpackJsonp([0],[
 	  $scope.users = ["Amy"];
 
 	  $scope.register = function(user) {
-	    console.log("submitted");
-	    console.log(user.email);
-	    console.log(user.password);
 	    var registered = authenticationService.saveUser(user).then(function(data) {
 	      console.log("came back");
 	      $window.localStorage['loggedin'] = 'true';

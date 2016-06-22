@@ -9,9 +9,6 @@ angular.module('wilbursJournal')
   $scope.users = ["Amy"];
 
   $scope.register = function(user) {
-    console.log("submitted");
-    console.log(user.email);
-    console.log(user.password);
     var registered = authenticationService.saveUser(user).then(function(data) {
       console.log("came back");
       $window.localStorage['loggedin'] = 'true';

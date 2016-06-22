@@ -2,24 +2,14 @@
 
 var angular = require('angular');
 
-angular.module('wilbursJournal').service('dataService', function($http, $window) {
+angular.module('wilbursJournal')
+.service('authenticationService', function($http, $q) {
 
-  var saveToken = function(token) {
-    $window.localStorage['mean-token'] = token;
+  this.saveUser = function(user) {
+    var deferred = $q.defer();
+    $http.post('/api/register', user).success(function(data) {
+       deferred.resolve(data);
+    });
+    return deferred.promise;
   };
-
-  var getToken = function() {
-    return $window.localStorage['mean-token'];
-  }
-
-  var logout = function() {
-    $window.localStorage.removeItem('mean-token');
-  };
-
-  return {
-    saveToken: saveToken,
-    getToken: getToken,
-    logout: logout
-  };
-
 });

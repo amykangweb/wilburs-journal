@@ -3,21 +3,24 @@
 var express = require('express');
 var parser = require('body-parser');
 var router = require('./api');
-var router = require('./api/register');
 var passport = require('passport');
 
 var app = express();
 
 require('./database');
 require('./models/user');
+require('./models/post');
 require('./config/passport');
 
 app.use('/', express.static('public'));
 app.use(parser.json());
 
 app.use(passport.initialize());
+
 app.use('/api', router);
-app.use('/api/register', router);
+
+app.use('/api', require('./api/register.js'));
+app.use('/api', require('./api/post.js'));
 
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
