@@ -15,6 +15,7 @@ angular.module('wilbursJournal').controller('registerCtrl', function($http, $sco
       console.log("came back");
       $window.localStorage['loggedin'] = 'true';
       $window.localStorage['token'] = data.token;
+      $window.localStorage['email'] = data.email;
       $scope.users.push(data.email);
     });
   };

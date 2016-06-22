@@ -9,11 +9,21 @@
 
   <ng-include src="'templates/navbar.html'"></ng-include>
 
+  <div ng-controller="registerCtrl as reg">
   <h1>Register</h1>
 
-  <register></register>
+  <!-- If logged in, show. -->
+  <div ng-if="loggedIn">
+    You are already logged in. Go the <a href="index.html">Home</a> Page.
+  </div>
+
+  <!-- If NOT logged in, show registration form. -->
+  <div ng-if="!loggedIn">
+    <register></register>
+  </div>
 
   <users></users>
+  </div>
 
   <script src="/scripts/vendor.bundle.js"></script>
   <script src="/scripts/wilbur.bundle.js"></script>
