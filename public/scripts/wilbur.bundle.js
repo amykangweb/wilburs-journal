@@ -9,7 +9,7 @@ webpackJsonp([0],[
 	angular.module('wilbursJournal', []);
 
 	__webpack_require__(3);
-	__webpack_require__(4);
+	__webpack_require__(10);
 	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(7);
@@ -33,35 +33,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var angular = __webpack_require__(1);
-
-	angular.module('wilbursJournal').controller('registerCtrl', function($http, $scope, $window, registrationService) {
-	  $scope.loggedIn = $window.localStorage['loggedin'];
-
-	  $scope.users = ["Amy"];
-
-	  $scope.register = function(user) {
-	    console.log("submitted");
-	    console.log(user.email);
-	    console.log(user.password);
-	    var registered = registrationService.saveUser(user).then(function(data) {
-	      console.log("came back");
-	      $window.localStorage['loggedin'] = 'true';
-	      $window.localStorage['token'] = data.token;
-	      $window.localStorage['email'] = data.email;
-	      $scope.users.push(data.email);
-	    });
-	  };
-
-	});
-
-
-/***/ },
+/* 4 */,
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -89,8 +61,7 @@ webpackJsonp([0],[
 	angular.module('wilbursJournal').directive('register', function() {
 	  return {
 	    templateUrl: 'templates/register.html',
-	    replace: true,
-	    controller: 'registerCtrl'
+	    replace: true
 	  }
 	});
 
@@ -106,8 +77,7 @@ webpackJsonp([0],[
 	angular.module('wilbursJournal').directive('users', function() {
 	  return {
 	    templateUrl: 'templates/users.html',
-	    replace: true,
-	    controller: 'registerCtrl'
+	    replace: true
 	  }
 	});
 
@@ -152,16 +122,54 @@ webpackJsonp([0],[
 	var angular = __webpack_require__(1);
 
 	angular.module('wilbursJournal')
-	.service('registrationService', function($http, $q) {
+	.service('authenticationService', function($http, $q) {
 
 	  this.saveUser = function(user) {
-	    console.log("save User");
 	    var deferred = $q.defer();
 	    $http.post('/api/register', user).success(function(data) {
 	       deferred.resolve(data);
 	    });
 	    return deferred.promise;
 	  };
+	});
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var angular = __webpack_require__(1);
+
+	angular.module('wilbursJournal')
+	.controller('authenticationCtrl', function($http, $scope, $rootScope, $window, authenticationService) {
+	  $rootScope.loggedIn = $window.localStorage['loggedin'];
+
+	  $scope.users = ["Amy"];
+
+	  $scope.register = function(user) {
+	    console.log("submitted");
+	    console.log(user.email);
+	    console.log(user.password);
+	    var registered = authenticationService.saveUser(user).then(function(data) {
+	      console.log("came back");
+	      $window.localStorage['loggedin'] = 'true';
+	      $window.localStorage['token'] = data.token;
+	      $window.localStorage['email'] = data.email;
+	      $scope.users.push(data.email);
+	      $rootScope.loggedIn = 'true';
+	    });
+	  };
+
+	  $rootScope.logOut = function() {
+	    console.log("log out.");
+	    $window.localStorage.removeItem('token');
+	    $window.localStorage.removeItem('loggedin');
+	    $window.localStorage.removeItem('email');
+	    $rootScope.loggedIn = 'false';
+	  };
+
 	});
 
 
