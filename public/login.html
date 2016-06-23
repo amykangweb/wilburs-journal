@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title></title>
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/styles/main.css" type="text/css">
+</head>
+<body ng-app="wilbursJournal">
+
+  <ng-include src="'templates/navbar.html'"></ng-include>
+
+  <div ng-controller="authenticationCtrl as auth">
+
+  <h1>Log In</h1>
+
+  {{ loggedIn != 'true' }}
+
+    <!-- If logged in, show. -->
+    <div ng-if="loggedIn === 'true'">
+      You are logged in. Go to the <a href="index.html">Home</a> Page.
+    </div>
+
+    <!-- If NOT logged in, show log in form. -->
+    <div ng-if="loggedIn != 'true'">
+      login here
+      <login></login>
+    </div>
+
+  <users></users>
+
+  </div>
+
+  <script src="/scripts/vendor.bundle.js"></script>
+  <script src="/scripts/wilbur.bundle.js"></script>
+</body>
+</html>

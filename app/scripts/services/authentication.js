@@ -12,4 +12,14 @@ angular.module('wilbursJournal')
     });
     return deferred.promise;
   };
+
+  this.signIn = function(user) {
+    var deferred = $q.defer();
+    $http.get('/api/login', user).success(function(data) {
+      console.log("signed in return");
+      deferred.resolve(data);
+    });
+    return deferred.promise;
+  };
+
 });

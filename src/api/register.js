@@ -33,4 +33,33 @@ var router = express.Router();
     });
   });
 
+  router.get('/login', function(req, res) {
+    var user = req.body;
+    passport.authenticate('local', function(err, user, info) {
+      var token;
+
+      // If Passport throws/catches an error
+      if (err) {
+        console.log("errored login");
+        res.status(404).json(err);
+        return;
+      }
+
+      // If a user is found
+      if (user) {
+        token = user.generateJWT();
+        console.log("everything good!");
+        res.status(200);
+        res.json({
+          "token" : token,
+          "email" : user.email
+        });
+      } else {
+        // If user is not found
+        console.log("user is not here.");
+        res.status(401).json(info);
+      }
+    })(req, res);
+  });
+
 module.exports = router;

@@ -4,7 +4,7 @@
     <li><a href="http://teamtreehouse.com">Treehouse</a></li>
 
     <span ng-controller="authenticationCtrl as auth">
-      <span ng-if="loggedIn">
+      <span ng-if="loggedIn === 'true'">
         <li><a href ng-click="logOut()">Log Out</a></li>
       </span>
     </span>

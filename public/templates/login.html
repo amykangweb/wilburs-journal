@@ -1,1 +1,14 @@
-login.html
+Hello log
+<form ng-submit="logIn(user)" name="newSession">
+<p>
+  <label for="email">Email</label><br>
+  <input type="text" name="email" ng-model="user.email">
+  </p>
+  <p>
+  <label for="password">Password</label><br>
+  <input type="password" name="password" ng-model="user.password">
+  </p>
+  <p>
+  <input type="submit" value="Log In!">
+  </p>
+</form>
