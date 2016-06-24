@@ -14,7 +14,6 @@ angular.module('wilbursJournal')
 
   $scope.register = function(user) {
     var registered = authenticationService.saveUser(user).then(function(data) {
-      console.log("came back");
       $window.localStorage['loggedin'] = 'true';
       $window.localStorage['token'] = data.token;
       $window.localStorage['email'] = data.email;
@@ -24,7 +23,6 @@ angular.module('wilbursJournal')
   };
 
   $scope.logIn = function(user) {
-    console.log("controller login");
     authenticationService.signIn(user).then(function(data) {
       $window.localStorage['loggedin'] = 'true';
       $window.localStorage['token'] = data.token;

@@ -14,10 +14,8 @@ angular.module('wilbursJournal')
   };
 
   this.signIn = function(user) {
-    console.log("sign in service");
     var deferred = $q.defer();
     $http.post('/api/login', user).success(function(data) {
-      console.log("signed in return");
       deferred.resolve(data);
     });
     return deferred.promise;

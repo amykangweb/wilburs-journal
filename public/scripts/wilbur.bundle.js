@@ -52,7 +52,6 @@ webpackJsonp([0],[
 
 	  $scope.register = function(user) {
 	    var registered = authenticationService.saveUser(user).then(function(data) {
-	      console.log("came back");
 	      $window.localStorage['loggedin'] = 'true';
 	      $window.localStorage['token'] = data.token;
 	      $window.localStorage['email'] = data.email;
@@ -62,7 +61,6 @@ webpackJsonp([0],[
 	  };
 
 	  $scope.logIn = function(user) {
-	    console.log("controller login");
 	    authenticationService.signIn(user).then(function(data) {
 	      $window.localStorage['loggedin'] = 'true';
 	      $window.localStorage['token'] = data.token;
@@ -167,10 +165,8 @@ webpackJsonp([0],[
 	  };
 
 	  this.signIn = function(user) {
-	    console.log("sign in service");
 	    var deferred = $q.defer();
 	    $http.post('/api/login', user).success(function(data) {
-	      console.log("signed in return");
 	      deferred.resolve(data);
 	    });
 	    return deferred.promise;
