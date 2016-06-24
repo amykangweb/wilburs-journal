@@ -2,6 +2,7 @@
 
 var express = require('express');
 var parser = require('body-parser');
+var mongoose = require('mongoose');
 var router = require('./api');
 var passport = require('passport');
 
@@ -16,6 +17,7 @@ app.use('/', express.static('public'));
 app.use(parser.json());
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api', router);
 

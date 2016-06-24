@@ -24,7 +24,7 @@ angular.module('wilbursJournal')
   };
 
   $scope.logIn = function(user) {
-    console.log("login");
+    console.log("controller login");
     authenticationService.signIn(user).then(function(data) {
       $window.localStorage['loggedin'] = 'true';
       $window.localStorage['token'] = data.token;

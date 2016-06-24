@@ -33,9 +33,12 @@ var router = express.Router();
     });
   });
 
-  router.get('/login', function(req, res) {
-    var user = req.body;
+  router.post('/login', function(req, res) {
+    console.log("log in request");
+    console.log(res);
     passport.authenticate('local', function(err, user, info) {
+    console.log("last passport auth");
+    console.log(user);
       var token;
 
       // If Passport throws/catches an error
@@ -59,6 +62,7 @@ var router = express.Router();
         console.log("user is not here.");
         res.status(401).json(info);
       }
+
     })(req, res);
   });
 

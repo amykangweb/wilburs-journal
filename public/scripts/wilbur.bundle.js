@@ -12,9 +12,9 @@ webpackJsonp([0],[
 	__webpack_require__(4);
 	__webpack_require__(5);
 	__webpack_require__(6);
-	__webpack_require__(9);
 	__webpack_require__(7);
 	__webpack_require__(8);
+	__webpack_require__(9);
 
 
 /***/ },
@@ -62,7 +62,7 @@ webpackJsonp([0],[
 	  };
 
 	  $scope.logIn = function(user) {
-	    console.log("login");
+	    console.log("controller login");
 	    authenticationService.signIn(user).then(function(data) {
 	      $window.localStorage['loggedin'] = 'true';
 	      $window.localStorage['token'] = data.token;
@@ -123,6 +123,22 @@ webpackJsonp([0],[
 
 	var angular = __webpack_require__(1);
 
+	angular.module('wilbursJournal').directive('login', function() {
+	  return {
+	    restrict: 'E',
+	    templateUrl: 'templates/login.html'
+	  }
+	});
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var angular = __webpack_require__(1);
+
 	angular.module('wilbursJournal').directive('users', function() {
 	  return {
 	    templateUrl: 'templates/users.html',
@@ -132,7 +148,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -151,30 +167,15 @@ webpackJsonp([0],[
 	  };
 
 	  this.signIn = function(user) {
+	    console.log("sign in service");
 	    var deferred = $q.defer();
-	    $http.get('/api/login', user).success(function(data) {
+	    $http.post('/api/login', user).success(function(data) {
 	      console.log("signed in return");
 	      deferred.resolve(data);
 	    });
 	    return deferred.promise;
 	  };
 
-	});
-
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var angular = __webpack_require__(1);
-
-	angular.module('wilbursJournal').directive('login', function() {
-	  return {
-	    restrict: 'E',
-	    templateUrl: 'templates/login.html'
-	  }
 	});
 
 

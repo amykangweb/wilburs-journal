@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 var secret = require('../../env');
@@ -23,7 +24,11 @@ userSchema.methods.setPassword = function(password) {
 };
 
 userSchema.methods.validPassword = function(password) {
+  console.log("Inside valid password method");
+  console.log(password);
   var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+  var result = (this.hash === hash);
+  console.log(result);
   return this.hash === hash;
 };
 
@@ -36,6 +41,8 @@ userSchema.methods.generateJWT = function() {
     exp: parseInt(expiry.getTime() / 1000),
   }, process.env.mysecret);
 };
+
+userSchema.plugin(passportLocalMongoose);
 
 var model = mongoose.model('User', userSchema);
 
